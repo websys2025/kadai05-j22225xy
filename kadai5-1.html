@@ -22,6 +22,8 @@
             if (data.results) {
                 const addr = data.results[0];
                 document.getElementById("result").innerHTML =  `${addr.address1} ${addr.address2} ${addr.address3}`;
+            }else{
+                document.getElementById("result").innerHTML = "見つかりませんでした";
             }
         }
     </script>
