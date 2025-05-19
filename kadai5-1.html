@@ -15,8 +15,16 @@
         async function zip_api(myForm) {
             const endpoint = "https://zipcloud.ibsnet.co.jp/api/search";
             // ここにコードを書く
+            const zip = myForm.zipcode.value.replace(/-/g, '');
+            const res = await fetch(`${endpoint}?zipcode=${zip}`);
+            const data = await res.json();
             // zipcloudのAPI呼び出して結果を表示する
-            document.getElementById("result").innerHTML =  myForm.zipcode.value; // 現状ではそのまま表示しているだけ
+            if (data.results) {
+                const addr = data.results[0];
+                document.getElementById("result").innerHTML =  `${addr.address1} ${addr.address2} ${addr.address3}`;
+            }else{
+                document.getElementById("result").innerHTML = "見つかりませんでした";
+            }
         }
     </script>
 </body>
