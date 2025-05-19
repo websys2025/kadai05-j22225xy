@@ -19,7 +19,10 @@
             const res = await fetch(`${endpoint}?zipcode=${zip}`);
             const data = await res.json();
             // zipcloudのAPI呼び出して結果を表示する
-            document.getElementById("result").innerHTML =  myForm.zipcode.value; // 現状ではそのまま表示しているだけ
+            if (data.results) {
+                const addr = data.results[0];
+                document.getElementById("result").innerHTML =  `${addr.address1} ${addr.address2} ${addr.address3}`;
+            }
         }
     </script>
 </body>
